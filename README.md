@@ -55,3 +55,12 @@ This query fetches aggredated data from all uniswap pairs and tokens, to give a 
   }
 }
 ```
+
+
+## Changes for Sommelier
+
+* Changed deployed subgraph name to sommelier/uniswap
+* Add fields for combined tracked and untracked volume: 
+    * `Pair.combinedVolumeUSD`
+    * `PairHourData.combinedHourlyVolumeUSD`
+    * `PairDayData.combinedDailyVolumeUSD`
