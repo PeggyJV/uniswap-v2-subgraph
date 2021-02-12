@@ -64,3 +64,4 @@ This query fetches aggredated data from all uniswap pairs and tokens, to give a 
     * `Pair.combinedVolumeUSD`
     * `PairHourData.combinedHourlyVolumeUSD`
     * `PairDayData.combinedDailyVolumeUSD`
+* Add simple deploy script at `deploy.sh`
