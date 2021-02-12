@@ -429,7 +429,6 @@ export function handleSwap(event: Swap): void {
   token0.tradeVolume = token0.tradeVolume.plus(amount0In.plus(amount0Out))
   token0.tradeVolumeUSD = token0.tradeVolumeUSD.plus(trackedAmountUSD)
   token0.untrackedVolumeUSD = token0.untrackedVolumeUSD.plus(derivedAmountUSD)
-  token0.allVolumeUSD = token0.untrackedVolumeUSD.plus(token0.tradeVolumeUSD);
 
   // update token1 global volume and token liquidity stats
   token1.tradeVolume = token1.tradeVolume.plus(amount1In.plus(amount1Out))
@@ -445,6 +444,12 @@ export function handleSwap(event: Swap): void {
   pair.volumeToken0 = pair.volumeToken0.plus(amount0Total)
   pair.volumeToken1 = pair.volumeToken1.plus(amount1Total)
   pair.untrackedVolumeUSD = pair.untrackedVolumeUSD.plus(derivedAmountUSD)
+
+  // SOMMELIER: add allVolume fields, using tracked amount if present, falling back to untracked
+  // Every pair is either tracked or untracked, so one of these will be 0,
+  // meaning we can take the sum
+  pair.combinedVolumeUSD = pair.combinedVolumeUSD.plus(pair.untrackedVolumeUSD.plus(pair.volumeUSD));
+
   pair.txCount = pair.txCount.plus(ONE_BI)
   pair.save()
 
